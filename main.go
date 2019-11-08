@@ -19,9 +19,13 @@ func main() {
 	}
 	fmt.Println("Fafeliscord Bot ot created")
 
-	// Add handlers
-	fmt.Println("Handler PingPong added")
-	discord.AddHandler(handlers.PingPong)
+	// Handlers
+
+	//fmt.Println("Handler PingPong added")
+	//discord.AddHandler(handlers.PingPong)
+
+	fmt.Println("Handler PlayScoring added")
+	discord.AddHandler(handlers.PlayScoring)
 
 	// Open Socket
 	err = discord.Open()

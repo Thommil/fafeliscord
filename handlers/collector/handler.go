@@ -33,6 +33,7 @@ func New() (*Collector, error) {
 }
 
 func (instance Collector) Handler(s *discordgo.Session, event *discordgo.PresenceUpdate) {
-
-	fmt.Println(event.Presence.Game.Name)
+	presence := instance.client.Database("").Collection("presence")
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
+	presence.InsertOne(ctx, event)
 }

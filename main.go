@@ -8,7 +8,6 @@ import (
 
 	discordgo "github.com/bwmarrin/discordgo"
 	collector "github.com/thommil/fafeliscord/handlers/collector"
-	pingpong "github.com/thommil/fafeliscord/handlers/pingpong"
 )
 
 func main() {
@@ -21,12 +20,12 @@ func main() {
 	fmt.Println("Fafeliscord Bot ot created")
 
 	// Handlers
-	if handler, err := pingpong.New(); err != nil {
-		fmt.Println("Failed to create PingPong handler", err)
-	} else {
-		discord.AddHandler(handler.Handler)
-		fmt.Println("Handler PingPong added")
-	}
+	// if handler, err := pingpong.New(); err != nil {
+	// 	fmt.Println("Failed to create PingPong handler", err)
+	// } else {
+	// 	discord.AddHandler(handler.Handler)
+	// 	fmt.Println("Handler PingPong added")
+	// }
 
 	if handler, err := collector.New(); err != nil {
 		fmt.Println("Failed to Collector handler", err)

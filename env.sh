@@ -11,7 +11,7 @@ fi
 export ENV=development
 
 #Set DISCORD_TOKEN
-export DISCORD_TOKEN=NjQyMzQ2NjYxNzE2Mjk1Njkx.XcVmZA.g1KlRbu98Lp_XjlBPnFPoCDQV6A
+export DISCORD_TOKEN=NOP
 
 #Set MONGO_URL
 export MONGO_URL="mongodb://mongo:27017"

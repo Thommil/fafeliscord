@@ -1,8 +1,20 @@
-package handlers
+package pingpong
 
-import "github.com/bwmarrin/discordgo"
+import (
+	fmt "fmt"
 
-func PingPong(s *discordgo.Session, m *discordgo.MessageCreate) {
+	discordgo "github.com/bwmarrin/discordgo"
+)
+
+type PingPong struct {
+}
+
+func New() (*PingPong, error) {
+	fmt.Println("New PingPong handler")
+	return &PingPong{}, nil
+}
+
+func (instance PingPong) Handler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// Ignore all messages created by the bot itself
 	// This isn't required in this specific example but it's a good practice.

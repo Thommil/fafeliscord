@@ -7,7 +7,8 @@ import (
 	syscall "syscall"
 
 	discordgo "github.com/bwmarrin/discordgo"
-	handlers "github.com/thommil/fafeliscord/handlers"
+	collector "github.com/thommil/fafeliscord/handlers/collector"
+	pingpong "github.com/thommil/fafeliscord/handlers/pingpong"
 )
 
 func main() {
@@ -20,12 +21,19 @@ func main() {
 	fmt.Println("Fafeliscord Bot ot created")
 
 	// Handlers
+	if handler, err := pingpong.New(); err != nil {
+		fmt.Println("Failed to create PingPong handler", err)
+	} else {
+		discord.AddHandler(handler.Handler)
+		fmt.Println("Handler PingPong added")
+	}
 
-	//fmt.Println("Handler PingPong added")
-	//discord.AddHandler(handlers.PingPong)
-
-	fmt.Println("Handler PlayScoring added")
-	discord.AddHandler(handlers.PlayScoring)
+	if handler, err := collector.New(); err != nil {
+		fmt.Println("Failed to Collector handler", err)
+	} else {
+		discord.AddHandler(handler.Handler)
+		fmt.Println("Handler Collector added")
+	}
 
 	// Open Socket
 	err = discord.Open()

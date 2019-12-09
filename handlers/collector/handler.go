@@ -16,6 +16,11 @@ type Collector struct {
 	client *mongo.Client
 }
 
+type Presence struct {
+	datetime time.Time
+	data     interface{}
+}
+
 func New() (*Collector, error) {
 	fmt.Println("New Collector handler")
 	var err error
@@ -36,7 +41,7 @@ func (instance Collector) Handler(s *discordgo.Session, event *discordgo.Presenc
 	presence := instance.client.Database("fafeliscord").Collection("presence")
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 
-	_, err := presence.InsertOne(ctx, event)
+	_, err := presence.InsertOne(ctx, Presence{time.Now(), event})
 	if err != nil {
 		fmt.Println("Error inserting presence", err)
 	}

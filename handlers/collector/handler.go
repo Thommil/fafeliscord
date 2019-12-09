@@ -8,7 +8,9 @@ import (
 
 	discordgo "github.com/bwmarrin/discordgo"
 
+	bson "go.mongodb.org/mongo-driver/bson"
 	mongo "go.mongodb.org/mongo-driver/mongo"
+
 	options "go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -41,7 +43,10 @@ func (instance Collector) Handler(s *discordgo.Session, event *discordgo.Presenc
 	presence := instance.client.Database("fafeliscord").Collection("presence")
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 
-	_, err := presence.InsertOne(ctx, Presence{time.Now(), event})
+	_, err := presence.InsertOne(ctx, bson.M{
+		"datetime": time.Now(),
+		"data":     event,
+	})
 	if err != nil {
 		fmt.Println("Error inserting presence", err)
 	}
